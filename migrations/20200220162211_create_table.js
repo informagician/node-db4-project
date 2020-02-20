@@ -15,6 +15,7 @@ exports.up = function(knex) {
       tbl.float('qty').notNullable().unsigned()
   })
   .createTable('instructions', tbl => {
+      tbl.increments()
       tbl.integer('recipe_id').unsigned().notNullable().references('id').inTable('recipe').onUpdate('CASCADE').onDelete('RESTRICT')
       tbl.string('step',256).notNullable()
   })
