@@ -10,15 +10,23 @@ function getRecipes() {
     return db('recipe')
 }
 
+// function getShoppingList(id) {
+//     return db('recipe_ingredient')
+//     // .join('recipe', 'recipe.id', 'recipe_ingredient.recipe_id')
+//     .join('ingredient', 'ingredient.id', 'recipe_ingredient.ingredient_id')
+//     .where({recipe_id:id})
+// }
+
 function getShoppingList(id) {
     return db('recipe_ingredient')
-    .join('recipe', 'recipe.id', 'recipe_ingredient.recipe_id')
+    .select('qty','name')
     .join('ingredient', 'ingredient.id', 'recipe_ingredient.ingredient_id')
     .where({recipe_id:id})
 }
 
 function getInstructions(id) {
     return db('recipe')
-    .join('instruction', 'recipe.id', 'instruction.recipe_id')
+    .select('step')
+    .join('instructions', 'recipe.id', 'instructions.recipe_id')
     .where({recipe_id:id})
 }
